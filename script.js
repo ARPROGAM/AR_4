@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const sceneView = document.querySelector('scene-view');
+    const modelViewer = document.getElementById('modelViewer');
     const lockPositionBtn = document.getElementById('lockPosition');
     const unlockPositionBtn = document.getElementById('unlockPosition');
     const lockRotationBtn = document.getElementById('lockRotation');
@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let positionLocked = false;
     let rotationLocked = false;
     let scale = 1;
-    
-    sceneView.src = 'your-model.glb'; // Replace with your GLB file path
 
     // Lock/Unlock Position
     lockPositionBtn.addEventListener('click', () => {
@@ -34,24 +32,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // Scale Up/Down
     scaleUpBtn.addEventListener('click', () => {
         scale += 0.1;
-        sceneView.style.transform = `scale(${scale})`;
+        modelViewer.style.transform = `scale(${scale})`;
     });
 
     scaleDownBtn.addEventListener('click', () => {
         scale = Math.max(0.1, scale - 0.1);
-        sceneView.style.transform = `scale(${scale})`;
+        modelViewer.style.transform = `scale(${scale})`;
     });
 
-    // Apply transformations based on locking state
-    sceneView.addEventListener('model-loaded', () => {
-        const model = sceneView.querySelector('model-viewer');
-        
+    // Handling position and rotation locking (Basic logic example)
+    modelViewer.addEventListener('load', () => {
         if (positionLocked) {
-            model.style.transform = 'translate(0, 0, 0)';
+            // Implement your logic to lock position
         }
         
         if (rotationLocked) {
-            model.style.transform += 'rotate(0deg)';
+            // Implement your logic to lock rotation
         }
     });
 });
